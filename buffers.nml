@@ -1,0 +1,69 @@
+/* multi-aspect-signals.nml */
+
+/*
+    License: GPL v2
+*/
+
+grf {
+    grfid: "JGR\82";
+    name: string(STR_GRF_NAME);
+    desc: string(STR_GRF_DESCRIPTION);
+    version: 3;
+    min_compatible_version: 0;
+    url: string(STR_GRF_URL);
+}
+
+if (!extended_feature_test("action0_object_use_land_ground") || !extended_feature_test("action0_object_edge_foundation_mode")) {
+    error(FATAL, string(STR_UNSUPPORTED_VERSION));
+}
+
+template tmpl_buffer(x, y) {
+    [ x, y, 64, 100, -31, -69 ]
+}
+
+spriteset (buffer_views, "gfx/buffers.png") {
+    tmpl_buffer(10, 0)
+    tmpl_buffer(90, 0)
+    tmpl_buffer(170, 0)
+    tmpl_buffer(250, 0)
+}
+
+spritelayout buffer_layout {
+    ground {
+        sprite: GROUNDSPRITE_NORMAL;
+    }
+    building {
+        sprite: buffer_views(view);
+        xextent: 16;
+        yextent: 16;
+        zextent: 8;
+        xoffset: 0;
+        yoffset: 0;
+        zoffset: 0;
+    }
+}
+
+item (FEAT_OBJECTS, item_buffer) {
+    property {
+        class:                  "JRTO";
+        classname:              string(STR_JRTO_NAME);
+        name:                   string(STR_BUFFER_NAME);
+        climates_available:     ALL_CLIMATES;
+        size:                   [1,1];
+        build_cost_multiplier:  8;
+        remove_cost_multiplier: 2;
+        introduction_date:      0;
+        end_of_life_date:       0xFFFFFFFF;
+        object_flags:           bitmask(OBJ_FLAG_ANYTHING_REMOVE, OBJ_FLAG_ALLOW_BRIDGE);
+        height:                 0;
+        num_views:              4;
+        use_land_ground:        1;
+        edge_foundation_mode:   [DIAGDIR_SW | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_SE | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_NW | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_NE | OBJECT_EF_FLAG_ADJUST_Z];
+    }
+    graphics {
+        default:            buffer_layout;
+        purchase:           buffer_layout;
+        autoslope:          return(CB_RESULT_AUTOSLOPE);
+        additional_text:    string(STR_BUFFER_PURCHASE);
+    }
+}

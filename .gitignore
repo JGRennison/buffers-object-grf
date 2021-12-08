@@ -1,0 +1,6 @@
+*.nfo
+*.grf
+*.tar
+.nmlcache/
+buffers/
+
