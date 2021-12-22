@@ -26,6 +26,14 @@ spriteset (buffer_views, "gfx/buffers.png") {
     tmpl_buffer(90, 0)
     tmpl_buffer(170, 0)
     tmpl_buffer(250, 0)
+    tmpl_buffer(10, 120)
+    tmpl_buffer(90, 120)
+    tmpl_buffer(170, 120)
+    tmpl_buffer(250, 120)
+    tmpl_buffer(10, 240)
+    tmpl_buffer(90, 240)
+    tmpl_buffer(170, 240)
+    tmpl_buffer(250, 240)
 }
 
 spritelayout buffer_layout {
@@ -33,7 +41,7 @@ spritelayout buffer_layout {
         sprite: GROUNDSPRITE_NORMAL;
     }
     building {
-        sprite: buffer_views(view);
+        sprite: buffer_views(view + LOAD_TEMP(0));
         xextent: 16;
         yextent: 16;
         zextent: 8;
@@ -41,6 +49,26 @@ spritelayout buffer_layout {
         yoffset: 0;
         zoffset: 0;
     }
+}
+
+switch (FEAT_OBJECTS, SELF, buffer_layout_up, STORE_TEMP(4, 0)) {
+    default: buffer_layout;
+}
+
+switch (FEAT_OBJECTS, SELF, buffer_layout_down, STORE_TEMP(8, 0)) {
+    default: buffer_layout;
+}
+
+switch (FEAT_OBJECTS, SELF, buffer_layout_slope, (view << 8) + tile_slope) {
+    0x0   + 12: buffer_layout_up;
+    0x0   +  3: buffer_layout_down;
+    0x100 +  9: buffer_layout_up;
+    0x100 +  6: buffer_layout_down;
+    0x200 +  6: buffer_layout_up;
+    0x200 +  9: buffer_layout_down;
+    0x300 +  3: buffer_layout_up;
+    0x300 + 12: buffer_layout_down;
+    default: buffer_layout;
 }
 
 item (FEAT_OBJECTS, item_buffer) {
@@ -61,7 +89,7 @@ item (FEAT_OBJECTS, item_buffer) {
         edge_foundation_mode:   [DIAGDIR_SW | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_SE | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_NW | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_NE | OBJECT_EF_FLAG_ADJUST_Z];
     }
     graphics {
-        default:            buffer_layout;
+        default:            buffer_layout_slope;
         purchase:           buffer_layout;
         autoslope:          return(CB_RESULT_AUTOSLOPE);
         additional_text:    string(STR_BUFFER_PURCHASE);
