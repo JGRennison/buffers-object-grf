@@ -59,7 +59,7 @@ switch (FEAT_OBJECTS, SELF, buffer_layout_down, STORE_TEMP(8, 0)) {
     default: buffer_layout;
 }
 
-switch (FEAT_OBJECTS, SELF, buffer_layout_slope, (view << 8) + tile_slope) {
+switch (FEAT_OBJECTS, SELF, buffer_layout_slope, (view << 8) + (tile_slope ^ foundation_change_tile_slope)) {
     0x0   + 12: buffer_layout_up;
     0x0   +  3: buffer_layout_down;
     0x100 +  9: buffer_layout_up;
@@ -86,7 +86,12 @@ item (FEAT_OBJECTS, item_buffer) {
         height:                 0;
         num_views:              4;
         use_land_ground:        1;
-        edge_foundation_mode:   [DIAGDIR_SW | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_SE | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_NW | OBJECT_EF_FLAG_ADJUST_Z, DIAGDIR_NE | OBJECT_EF_FLAG_ADJUST_Z];
+        edge_foundation_mode:   [
+            DIAGDIR_SW | OBJECT_EF_FLAG_ADJUST_Z | OBJECT_EF_FLAG_INCLINE_FOUNDATION,
+            DIAGDIR_SE | OBJECT_EF_FLAG_ADJUST_Z | OBJECT_EF_FLAG_INCLINE_FOUNDATION,
+            DIAGDIR_NW | OBJECT_EF_FLAG_ADJUST_Z | OBJECT_EF_FLAG_INCLINE_FOUNDATION,
+            DIAGDIR_NE | OBJECT_EF_FLAG_ADJUST_Z | OBJECT_EF_FLAG_INCLINE_FOUNDATION
+        ];
     }
     graphics {
         default:            buffer_layout_slope;
