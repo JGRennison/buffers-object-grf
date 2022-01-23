@@ -1,10 +1,10 @@
 ﻿##grflangid 0x01
-STR_GRF_NAME                                :Buffers test
-STR_GRF_DESCRIPTION                         :{}Buffers test{}{}This GRF requires an OpenTTD version which supports this feature such as JGR's patchpack v0.44.2 or later.{}{}License: GPL v2
+STR_GRF_NAME                                :Buffers (slope and ground type aware)
+STR_GRF_DESCRIPTION                         :{}Buffers (slope and ground type aware){}{}This GRF requires an OpenTTD version which supports this feature such as JGR's patchpack v0.44.2 or later.{}{}License: GPL v2
 STR_GRF_URL                                 :https://github.com/JGRennison/multi-aspect-signals-grf
 
 STR_UNSUPPORTED_VERSION                     :Requires an OpenTTD version which supports this feature such as JGR's patchpack v0.44.2 or later.
 
-STR_JRTO_NAME                               :Test buffers
+STR_JRTO_NAME                               :Buffers (slope and ground type aware)
 STR_BUFFER_NAME                             :Buffers
-STR_BUFFER_PURCHASE                         :Buffer purchase text
+STR_BUFFER_PURCHASE                         :
