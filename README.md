@@ -1,6 +1,8 @@
-# Buffers test NewGRF
+# Buffers (slope and ground type aware) NewGRF
 
 ### Features
+
+* This GRF adds buffer objects which use the underlying ground type, and which support being placed on slopes without unnecessary foundations.
 
 ### Requirements
 
@@ -19,4 +21,4 @@
 
 ### Credits
 
-Placeholder graphics borrowed from Dutch Station Addition Set, Part 2 v0.4: https://www.tt-forums.net/viewtopic.php?t=74530
+Buffer sprites copied from Dutch Station Addition Set, Part 2 v0.4: https://www.tt-forums.net/viewtopic.php?t=74530 by Quast65, and then modified to create sloped variants.
