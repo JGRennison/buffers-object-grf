@@ -1,7 +1,7 @@
 ﻿##grflangid 0x01
 STR_GRF_NAME                                :Buffers (slope and ground type aware)
 STR_GRF_DESCRIPTION                         :{}Buffers (slope and ground type aware){}{}This GRF requires an OpenTTD version which supports this feature such as JGR's patchpack v0.44.2 or later.{}{}License: GPL v2
-STR_GRF_URL                                 :https://github.com/JGRennison/multi-aspect-signals-grf
+STR_GRF_URL                                 :https://github.com/JGRennison/buffers-object-grf
 
 STR_UNSUPPORTED_VERSION                     :Requires an OpenTTD version which supports this feature such as JGR's patchpack v0.44.2 or later.
 
